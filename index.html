@@ -1,10 +1,244 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Rafael Lopes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rafael Lopes</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#0a0a0a;
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#0066ff;
+    filter:blur(180px);
+    opacity:.15;
+    border-radius:50%;
+}
+
+.container{
+    max-width:900px;
+    text-align:center;
+    padding:40px;
+    z-index:1;
+}
+
+.boot{
+    color:#00ff88;
+    font-size:14px;
+    margin-bottom:25px;
+    font-family:monospace;
+}
+
+h1{
+    font-size:4rem;
+    margin-bottom:10px;
+    text-transform:uppercase;
+    letter-spacing:4px;
+}
+
+.main-title{
+    font-size:1.4rem;
+    color:#ffffff;
+    margin-bottom:12px;
+}
+
+.subtitle{
+    color:#7d7d7d;
+    font-size:1rem;
+    margin-bottom:40px;
+}
+
+.typing{
+    color:#00ff88;
+    font-size:1.2rem;
+    min-height:35px;
+    margin-bottom:35px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.btn{
+    text-decoration:none;
+    color:white;
+    padding:14px 28px;
+    border:1px solid #1e90ff;
+    border-radius:12px;
+    transition:.3s;
+    backdrop-filter:blur(5px);
+}
+
+.btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 25px #1e90ff;
+}
+
+.cards{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:15px;
+    padding:20px;
+    background:rgba(255,255,255,.03);
+    transition:.3s;
+}
+
+.card:hover{
+    border-color:#00ff88;
+    box-shadow:0 0 20px rgba(0,255,136,.2);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+.card p{
+    color:#a0a0a0;
+    font-size:.9rem;
+}
+
+@media(max-width:768px){
+
+    h1{
+        font-size:2.5rem;
+    }
+
+    .main-title{
+        font-size:1.1rem;
+    }
+
+}
+
+</style>
 </head>
 <body>
-    <h1>Olá, eu sou Rafael Lopes</h1>
-    <p>Meu portfólio está em construção.</p>
+
+<div class="container">
+
+<div class="boot">
+> initializing profile...
+</div>
+
+<h1>Rafael Lopes</h1>
+
+<div class="main-title">
+Automação, Dados e Inteligência para Negócios
+</div>
+
+<div class="subtitle">
+Data Analyst | Python | SQL | Business Intelligence | Financial Operations
+</div>
+
+<div class="typing" id="typing"></div>
+
+<div class="buttons">
+    <a class="btn" href="https://github.com/rafaellop3s" target="_blank">GitHub</a>
+    <a class="btn" href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a class="btn" href="#">Projetos</a>
+    <a class="btn" href="#">Contato</a>
+</div>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>🤖 Automação</h3>
+        <p>Python, integrações, robôs e otimização de processos.</p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Dados</h3>
+        <p>Análise de dados, SQL, dashboards e indicadores.</p>
+    </div>
+
+    <div class="card">
+        <h3>💰 Financeiro</h3>
+        <p>Mais de 10 anos em operações financeiras e gestão administrativa.</p>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+
+const phrases = [
+"Transformando processos manuais em soluções inteligentes.",
+"Automação de tarefas repetitivas.",
+"Dados que apoiam decisões.",
+"Python • SQL • BI • Processos."
+];
+
+let i = 0;
+let j = 0;
+let currentPhrase = [];
+let isDeleting = false;
+
+function loop(){
+
+    document.getElementById("typing").innerHTML =
+        currentPhrase.join("");
+
+    if(!isDeleting && j <= phrases[i].length){
+        currentPhrase.push(phrases[i][j]);
+        j++;
+    }
+
+    if(isDeleting && j > 0){
+        currentPhrase.pop();
+        j--;
+    }
+
+    if(j == phrases[i].length){
+        isDeleting = true;
+        setTimeout(loop,1500);
+        return;
+    }
+
+    if(isDeleting && j === 0){
+        currentPhrase = [];
+        isDeleting = false;
+        i++;
+        if(i === phrases.length){
+            i = 0;
+        }
+    }
+
+    setTimeout(loop,isDeleting ? 35 : 75);
+}
+
+loop();
+
+</script>
+
 </body>
 </html>
