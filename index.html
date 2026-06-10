@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#081525" />
+<meta name="theme-color" content="#06101d" />
 <title>Rafael Lopes</title>
 
 <style>
 :root{
-    --bg: #07111f;
-    --bg-2: #081525;
-    --panel: rgba(8, 21, 37, .62);
-    --panel-strong: rgba(10, 24, 42, .82);
-    --line: rgba(130, 180, 255, .22);
+    --bg: #06101d;
+    --bg-2: #081729;
+    --panel: rgba(8, 23, 41, .68);
+    --panel-strong: rgba(9, 26, 47, .88);
+    --line: rgba(146, 191, 255, .22);
     --text: #f5f8ff;
-    --muted: #9ca9bd;
-    --muted-2: #76839b;
-    --accent: #1f75ff;
-    --accent-2: #3ea0ff;
-    --accent-3: #0ea5e9;
-    --glow: rgba(31, 117, 255, .28);
-    --glow-2: rgba(62, 160, 255, .18);
+    --muted: #9dadc0;
+    --muted-2: #76869b;
+    --blue: #1f75ff;
+    --blue-2: #3ea0ff;
+    --blue-soft: rgba(31, 117, 255, .24);
+    --orange: #ff9d2e;
+    --orange-soft: rgba(255, 157, 46, .18);
 }
 
 *{
@@ -36,41 +36,42 @@ html{
 
 body{
     font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    color:var(--text);
     background:
-        radial-gradient(circle at top left, rgba(31,117,255,.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(14,165,233,.10), transparent 28%),
+        radial-gradient(circle at top left, rgba(31,117,255,.15), transparent 30%),
+        radial-gradient(circle at top right, rgba(255,157,46,.10), transparent 24%),
         linear-gradient(180deg, var(--bg), var(--bg-2));
+    color:var(--text);
     min-height:100vh;
     overflow-x:hidden;
     position:relative;
+    overscroll-behavior-x:none;
 }
 
 body::before{
     content:"";
     position:fixed;
-    width:560px;
-    height:560px;
-    background:var(--accent);
+    width:540px;
+    height:540px;
+    background:var(--blue);
     border-radius:50%;
-    filter:blur(180px);
+    filter:blur(185px);
     opacity:.12;
     left:-180px;
-    top:-120px;
+    top:-140px;
     z-index:-2;
 }
 
 body::after{
     content:"";
     position:fixed;
-    width:560px;
-    height:560px;
-    background:var(--accent-3);
+    width:540px;
+    height:540px;
+    background:var(--orange);
     border-radius:50%;
-    filter:blur(180px);
-    opacity:.10;
+    filter:blur(185px);
+    opacity:.08;
     right:-180px;
-    bottom:-140px;
+    bottom:-160px;
     z-index:-2;
 }
 
@@ -78,8 +79,9 @@ body::after{
     width:100%;
     max-width:1200px;
     margin:0 auto;
-    padding:56px 22px 72px;
+    padding:54px 22px 70px;
     text-align:center;
+    position:relative;
 }
 
 .boot,
@@ -88,7 +90,7 @@ h1,
 .subtitle,
 .subtitle-en,
 .typing,
-.buttons,
+.contact-grid,
 .triangle-section,
 .triangle-note,
 .info-panel{
@@ -97,100 +99,179 @@ h1,
 }
 
 .boot{
-    color:#9fd0ff;
+    color:#a7d5ff;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size:.95rem;
-    margin-bottom:26px;
-    animation-delay:.1s;
+    margin-bottom:22px;
+    animation-delay:.08s;
 }
 
 h1{
-    font-size:clamp(2.3rem, 9vw, 5.8rem);
-    letter-spacing:clamp(1px, .6vw, 4px);
-    font-weight:800;
+    font-size:clamp(2.35rem, 10vw, 5.9rem);
     line-height:.95;
-    white-space:nowrap;
+    font-weight:800;
+    letter-spacing:clamp(1px, .6vw, 4px);
     margin-bottom:16px;
-    animation-delay:.35s;
+    text-shadow:
+        0 0 16px rgba(31,117,255,.28),
+        0 0 30px rgba(31,117,255,.12);
+    animation-delay:.32s;
 }
 
 .main-title{
-    font-size:clamp(1.02rem, 2.7vw, 1.55rem);
+    font-size:clamp(1.02rem, 2.8vw, 1.55rem);
     color:#eef5ff;
     margin-bottom:10px;
-    animation-delay:.7s;
+    animation-delay:.62s;
 }
 
 .subtitle{
     color:var(--muted);
     font-size:1rem;
     margin-bottom:8px;
-    animation-delay:.95s;
+    animation-delay:.85s;
 }
 
 .subtitle-en{
     color:var(--muted-2);
     font-size:.92rem;
-    letter-spacing:.4px;
-    margin-bottom:34px;
-    animation-delay:1.1s;
+    letter-spacing:.45px;
+    margin-bottom:32px;
+    animation-delay:1.02s;
 }
 
 .typing{
     min-height:40px;
-    color:#bcd9ff;
+    color:#7ec8ff;
     font-size:1.08rem;
-    margin-bottom:36px;
-    animation-delay:1.35s;
+    margin-bottom:34px;
+    animation-delay:1.22s;
 }
 
-.buttons{
-    display:flex;
-    justify-content:center;
+/* Contatos */
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
     gap:14px;
-    flex-wrap:wrap;
-    margin-bottom:52px;
-    animation-delay:1.7s;
+    margin:0 auto 54px;
+    animation-delay:1.5s;
+    max-width:980px;
 }
 
-.btn{
-    display:inline-flex;
+.contact-card{
+    display:flex;
     align-items:center;
-    justify-content:center;
+    gap:14px;
+    text-align:left;
+    padding:16px 16px 16px 14px;
     text-decoration:none;
     color:var(--text);
-    border:1px solid rgba(62,160,255,.45);
-    background:linear-gradient(180deg, rgba(12,28,48,.72), rgba(9,20,36,.85));
-    padding:14px 26px;
-    min-width:150px;
-    border-radius:14px;
-    transition:.25s ease;
-    box-shadow:0 0 0 1px rgba(255,255,255,.02) inset;
+    border-radius:18px;
+    background:
+        linear-gradient(180deg, rgba(9,26,47,.84), rgba(7,18,33,.92));
+    border:1px solid rgba(135, 183, 255, .18);
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,.02) inset,
+        0 14px 32px rgba(0,0,0,.18);
+    position:relative;
+    overflow:hidden;
+    transition:.24s ease;
+    min-height:86px;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
 }
 
-.btn:hover{
+.contact-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(90deg, rgba(31,117,255,.10), rgba(255,157,46,.08));
+    opacity:0;
+    transition:.24s ease;
+}
+
+.contact-card:hover{
     transform:translateY(-3px);
-    border-color:rgba(62,160,255,.78);
-    box-shadow:0 0 24px var(--glow), 0 0 0 1px rgba(255,255,255,.04) inset;
+    border-color:rgba(62,160,255,.42);
+    box-shadow:
+        0 0 0 1px rgba(255,255,255,.03) inset,
+        0 16px 36px rgba(0,0,0,.22),
+        0 0 24px rgba(31,117,255,.14);
 }
 
+.contact-card:hover::before{
+    opacity:1;
+}
+
+.contact-icon{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 42px;
+    background:
+        linear-gradient(180deg, rgba(31,117,255,.18), rgba(255,157,46,.08));
+    border:1px solid rgba(126,200,255,.20);
+    box-shadow:0 0 18px rgba(31,117,255,.12);
+}
+
+.contact-icon svg{
+    width:22px;
+    height:22px;
+    stroke:#d8ecff;
+    fill:none;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.contact-content{
+    flex:1;
+    min-width:0;
+}
+
+.contact-content strong{
+    display:block;
+    font-size:1rem;
+    margin-bottom:4px;
+    letter-spacing:.2px;
+}
+
+.contact-content small{
+    display:block;
+    color:#9fb1c6;
+    font-size:.84rem;
+    line-height:1.25;
+}
+
+.contact-arrow{
+    color:#86bfff;
+    font-size:1.15rem;
+    margin-left:auto;
+    opacity:.9;
+}
+
+/* Seção do triângulo */
 .triangle-section{
-    animation-delay:2.05s;
+    animation-delay:1.92s;
 }
 
 .triangle-note{
-    color:#d9e7ff;
-    font-size:1.45rem;
+    color:#dbe9ff;
+    font-size:1.3rem;
     font-weight:700;
     margin-bottom:18px;
-    animation-delay:2.25s;
+    letter-spacing:.2px;
+    animation-delay:2.1s;
 }
 
 .triangle-wrap{
     width:100%;
-    max-width:920px;
+    max-width:980px;
     margin:0 auto;
-    padding:18px 14px 8px;
+    padding:14px 10px 0;
 }
 
 .triangle-svg{
@@ -198,6 +279,9 @@ h1{
     height:auto;
     display:block;
     overflow:visible;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-touch-callout:none;
 }
 
 .area{
@@ -205,67 +289,84 @@ h1{
     transition:filter .2s ease, transform .2s ease;
     transform-box:fill-box;
     transform-origin:center;
+    outline:none;
+    -webkit-tap-highlight-color:transparent;
 }
 
 .area:hover{
-    filter:brightness(1.08) saturate(1.1);
+    filter:brightness(1.05);
 }
 
 .area.active{
-    filter:brightness(1.18) saturate(1.15);
+    filter:brightness(1.18) saturate(1.12);
 }
 
 .region{
-    stroke:rgba(180, 210, 255, .25);
+    stroke:rgba(182, 211, 255, .22);
     stroke-width:3;
     paint-order:stroke fill;
+    transition:fill .25s ease, stroke .25s ease, filter .25s ease;
 }
 
-.top-fill{
-    fill:rgba(16, 53, 96, .90);
+.area.active .region{
+    stroke:rgba(126, 200, 255, .8);
+    fill:rgba(31,117,255,.50);
+    filter:drop-shadow(0 0 14px rgba(31,117,255,.34));
 }
 
-.left-fill{
-    fill:rgba(11, 40, 74, .90);
+.area:not(.active) .region{
+    fill:rgba(10, 25, 44, .95);
 }
 
-.right-fill{
-    fill:rgba(9, 33, 63, .92);
-}
-
-.center-fill{
-    fill:rgba(13, 47, 88, .96);
-}
+.top-fill{}
+.left-fill{}
+.right-fill{}
+.center-fill{}
 
 .label{
-    fill:#f3f8ff;
-    font-weight:700;
+    fill:#f5f8ff;
+    font-weight:800;
     letter-spacing:1px;
+    paint-order:stroke fill;
+    stroke:rgba(0,0,0,.25);
+    stroke-width:2;
 }
 
 .label-small{
-    fill:#bfd1ea;
+    fill:#b7c9de;
     font-size:22px;
     letter-spacing:.8px;
 }
 
 .label-desc{
-    fill:#e2ecfb;
+    fill:#eef5ff;
     font-size:18px;
     line-height:1.4;
 }
 
 .info-panel{
-    max-width:760px;
-    margin:24px auto 0;
+    max-width:780px;
+    margin:26px auto 0;
     padding:22px 22px 20px;
-    border:1px solid rgba(130,180,255,.22);
-    border-radius:18px;
+    border:1px solid rgba(135,183,255,.22);
+    border-radius:20px;
     background:var(--panel);
-    backdrop-filter:blur(10px);
-    box-shadow:0 14px 40px rgba(0,0,0,.22);
+    backdrop-filter:blur(12px);
+    box-shadow:0 14px 42px rgba(0,0,0,.24);
     text-align:left;
-    animation-delay:2.4s;
+    position:relative;
+    overflow:hidden;
+    animation-delay:2.35s;
+}
+
+.info-panel::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg, rgba(31,117,255,.95), rgba(255,157,46,.85));
 }
 
 .info-top{
@@ -278,12 +379,13 @@ h1{
 
 .info-title{
     font-size:1.2rem;
-    font-weight:700;
+    font-weight:800;
     margin-bottom:4px;
+    color:#f7fbff;
 }
 
 .info-sub{
-    color:#9fb4cf;
+    color:#8ea2ba;
     font-size:.92rem;
     text-transform:uppercase;
     letter-spacing:1.2px;
@@ -292,7 +394,7 @@ h1{
 .info-desc{
     margin-top:12px;
     color:#e6efff;
-    line-height:1.6;
+    line-height:1.65;
     font-size:1rem;
 }
 
@@ -304,7 +406,7 @@ h1{
 }
 
 .badge{
-    border:1px solid rgba(62,160,255,.35);
+    border:1px solid rgba(62,160,255,.34);
     background:rgba(255,255,255,.03);
     color:#d8e9ff;
     padding:8px 12px;
@@ -323,29 +425,30 @@ h1{
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 900px){
+    .contact-grid{
+        grid-template-columns:1fr;
+        max-width:640px;
+    }
 
+    .triangle-note{
+        font-size:1.18rem;
+    }
+}
+
+@media (max-width: 768px){
     .container{
         padding:42px 16px 56px;
     }
 
     h1{
-        font-size:clamp(2.2rem, 12vw, 4rem);
-        letter-spacing:1.8px;
+        font-size:clamp(2.2rem, 12vw, 4.2rem);
+        letter-spacing:1.4px;
         white-space:nowrap;
     }
 
-    .buttons{
-        flex-direction:column;
-        align-items:center;
-    }
-
-    .btn{
-        width:min(280px, 100%);
-    }
-
-    .triangle-note{
-        font-size:1.2rem;
+    .contact-card{
+        min-height:82px;
     }
 
     .info-panel{
@@ -374,7 +477,6 @@ h1{
 }
 
 @media (max-width: 520px){
-
     h1{
         white-space:normal;
         line-height:1;
@@ -391,8 +493,10 @@ h1{
 
     .typing{
         font-size:1rem;
+        min-height:34px;
     }
 }
+
 </style>
 </head>
 <body>
@@ -409,17 +513,57 @@ h1{
 
     <div class="typing" id="typing"></div>
 
-    <div class="buttons">
-        <a class="btn" href="https://github.com/rafaellop3s" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a class="btn" href="https://www.instagram.com/rafaellop3s/" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a class="btn" href="https://wa.me/5569999947214" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    <div class="contact-grid">
+        <a class="contact-card" href="https://github.com/rafaellop3s" target="_blank" rel="noopener noreferrer">
+            <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 19c-4 1.2-4-2-5-2"></path>
+                    <path d="M15 22v-3.2c0-.7.2-1.1-.4-1.3 2.7-.3 5.6-1.3 5.6-6a4.7 4.7 0 0 0-1.2-3.2 4.3 4.3 0 0 0-.1-3.1s-1-.3-3.3 1.2a11.2 11.2 0 0 0-6 0C7.1 5.3 6.1 5.6 6.1 5.6a4.3 4.3 0 0 0-.1 3.1 4.7 4.7 0 0 0-1.2 3.2c0 4.7 2.9 5.7 5.6 6-.5.2-.4.7-.4 1.3V22"></path>
+                </svg>
+            </div>
+            <div class="contact-content">
+                <strong>GitHub</strong>
+                <small>Repositórios e código</small>
+            </div>
+            <div class="contact-arrow">→</div>
+        </a>
+
+        <a class="contact-card" href="https://www.instagram.com/rafaellop3s/" target="_blank" rel="noopener noreferrer">
+            <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17.5" cy="6.5" r="1.2"></circle>
+                </svg>
+            </div>
+            <div class="contact-content">
+                <strong>Instagram</strong>
+                <small>Conteúdo e contato direto</small>
+            </div>
+            <div class="contact-arrow">→</div>
+        </a>
+
+        <a class="contact-card" href="https://wa.me/5569999947214" target="_blank" rel="noopener noreferrer">
+            <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11.5a8 8 0 0 1-12.2 6.8L4 19l.8-3.5A8 8 0 1 1 20 11.5z"></path>
+                    <path d="M9 9.6c.4 2 2 3.7 4 4.2"></path>
+                    <path d="M13.8 14l1.2-1"></path>
+                </svg>
+            </div>
+            <div class="contact-content">
+                <strong>WhatsApp</strong>
+                <small>Atendimento e orçamento</small>
+            </div>
+            <div class="contact-arrow">→</div>
+        </a>
     </div>
 
     <section class="triangle-section" aria-label="Áreas de atuação">
-        <div class="triangle-note">Áreas de Atuação</div>
+        <div class="triangle-note">Selecione para detalhes</div>
 
         <div class="triangle-wrap">
-            <svg class="triangle-svg" viewBox="0 0 1000 860" role="img" aria-label="Triângulo com áreas de atuação em Automação, Dados e Finanças">
+            <svg class="triangle-svg" viewBox="0 0 1000 860" role="img" aria-label="Triângulo com áreas de atuação em Automação, Dados, Gestão Financeira e Inteligência de Negócios">
                 <defs>
                     <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
                         <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
@@ -430,59 +574,38 @@ h1{
                     </filter>
                 </defs>
 
-                <!-- Top: Dados -->
                 <g class="area active" data-title="DADOS" data-sub="data analytics" data-desc="Análise de dados, SQL, dashboards e indicadores para apoiar decisões mais sólidas e consistentes." data-badges="SQL|Dashboards|KPIs|BI">
                     <polygon class="region top-fill" points="500,20 260,420 740,420"></polygon>
                     <text x="500" y="180" text-anchor="middle" class="label" font-size="42" filter="url(#softGlow)">DADOS</text>
                     <text x="500" y="232" text-anchor="middle" class="label-small">data analytics</text>
-                    <text x="500" y="276" text-anchor="middle" class="label-desc">
-                        <tspan x="500" dy="0">Análise de dados, SQL, dashboards</tspan>
-                        <tspan x="500" dy="26">e indicadores para decisões.</tspan>
-                    </text>
                 </g>
 
-                <!-- Left: Automação -->
                 <g class="area" data-title="AUTOMAÇÃO" data-sub="automation" data-desc="Integrações, Python, APIs e automação de tarefas para reduzir trabalho manual e aumentar produtividade." data-badges="Python|APIs|Integrações|Processos">
                     <polygon class="region left-fill" points="20,840 260,420 500,840"></polygon>
                     <text x="265" y="620" text-anchor="middle" class="label" font-size="40" filter="url(#softGlow)">AUTOMAÇÃO</text>
-                    <text x="265" y="670" text-anchor="middle" class="label-small">automation</text>
-                    <text x="265" y="716" text-anchor="middle" class="label-desc">
-                        <tspan x="265" dy="0">Integrações, Python, APIs e</tspan>
-                        <tspan x="265" dy="26">otimização de processos.</tspan>
-                    </text>
+                    <text x="265" y="672" text-anchor="middle" class="label-small">automation</text>
                 </g>
 
-                <!-- Right: Finanças -->
-                <g class="area" data-title="FINANÇAS" data-sub="financial operations" data-desc="Fluxo de caixa, indicadores financeiros, controle operacional e apoio à gestão com visão de negócio." data-badges="Fluxo de Caixa|Indicadores|Gestão|Controle">
+                <g class="area" data-title="GESTÃO FINANCEIRA" data-sub="financial operations" data-desc="Fluxo de caixa, indicadores financeiros, controle operacional e apoio à gestão com visão de negócio." data-badges="Fluxo de Caixa|Indicadores|Gestão|Controle">
                     <polygon class="region right-fill" points="980,840 740,420 500,840"></polygon>
-                    <text x="735" y="620" text-anchor="middle" class="label" font-size="40" filter="url(#softGlow)">FINANÇAS</text>
-                    <text x="735" y="670" text-anchor="middle" class="label-small">financial operations</text>
-                    <text x="735" y="716" text-anchor="middle" class="label-desc">
-                        <tspan x="735" dy="0">Fluxo de caixa, indicadores e</tspan>
-                        <tspan x="735" dy="26">gestão operacional.</tspan>
-                    </text>
+                    <text x="735" y="620" text-anchor="middle" class="label" font-size="36" filter="url(#softGlow)">GESTÃO FINANCEIRA</text>
+                    <text x="735" y="672" text-anchor="middle" class="label-small">financial operations</text>
                 </g>
 
-                <!-- Center: Inteligência de Negócios -->
                 <g class="area" data-title="INTELIGÊNCIA DE NEGÓCIOS" data-sub="business intelligence" data-desc="A interseção entre automação, dados e finanças. Onde a informação vira decisão e processo." data-badges="Estratégia|Decisão|Insights|Eficiência">
                     <polygon class="region center-fill" points="260,420 740,420 500,840"></polygon>
                     <text x="500" y="500" text-anchor="middle" class="label" font-size="31" filter="url(#softGlow)">
                         <tspan x="500" dy="0">INTELIGÊNCIA</tspan>
                         <tspan x="500" dy="38">DE NEGÓCIOS</tspan>
                     </text>
-                    <text x="500" y="596" text-anchor="middle" class="label-small">business intelligence</text>
-                    <text x="500" y="642" text-anchor="middle" class="label-desc">
-                        <tspan x="500" dy="0">A interseção entre automação, dados</tspan>
-                        <tspan x="500" dy="26">e finanças para gerar decisão.</tspan>
-                    </text>
+                    <text x="500" y="598" text-anchor="middle" class="label-small">business intelligence</text>
                 </g>
 
-                <!-- Border lines -->
-                <polyline points="500,20 260,420 20,840" fill="none" stroke="rgba(214,232,255,.28)" stroke-width="3"></polyline>
-                <polyline points="500,20 740,420 980,840" fill="none" stroke="rgba(214,232,255,.28)" stroke-width="3"></polyline>
-                <polyline points="260,420 740,420" fill="none" stroke="rgba(214,232,255,.28)" stroke-width="3"></polyline>
-                <polyline points="260,420 500,840 740,420" fill="none" stroke="rgba(214,232,255,.28)" stroke-width="3"></polyline>
-                <polyline points="20,840 980,840" fill="none" stroke="rgba(214,232,255,.28)" stroke-width="3"></polyline>
+                <polyline points="500,20 260,420 20,840" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
+                <polyline points="500,20 740,420 980,840" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
+                <polyline points="260,420 740,420" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
+                <polyline points="260,420 500,840 740,420" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
+                <polyline points="20,840 980,840" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
             </svg>
         </div>
 
@@ -519,34 +642,34 @@ let currentPhrase = 0;
 let currentLetter = 0;
 let deleting = false;
 
-function typeEffect() {
+function typeEffect(){
     const element = document.getElementById("typing");
     const phrase = phrases[currentPhrase];
 
-    if (!deleting) {
+    if(!deleting){
         element.textContent = phrase.substring(0, currentLetter + 1);
         currentLetter++;
 
-        if (currentLetter === phrase.length) {
+        if(currentLetter === phrase.length){
             deleting = true;
             setTimeout(typeEffect, 1500);
             return;
         }
-    } else {
+    }else{
         element.textContent = phrase.substring(0, currentLetter - 1);
         currentLetter--;
 
-        if (currentLetter === 0) {
+        if(currentLetter === 0){
             deleting = false;
             currentPhrase++;
-            if (currentPhrase >= phrases.length) currentPhrase = 0;
+            if(currentPhrase >= phrases.length) currentPhrase = 0;
         }
     }
 
     setTimeout(typeEffect, deleting ? 38 : 76);
 }
 
-setTimeout(typeEffect, 2000);
+setTimeout(typeEffect, 1800);
 
 const areas = document.querySelectorAll(".area");
 const infoTitle = document.getElementById("infoTitle");
@@ -554,7 +677,7 @@ const infoSub = document.getElementById("infoSub");
 const infoDesc = document.getElementById("infoDesc");
 const infoBadges = document.getElementById("infoBadges");
 
-function setInfo(area) {
+function setInfo(area){
     infoTitle.textContent = area.dataset.title;
     infoSub.textContent = area.dataset.sub;
     infoDesc.textContent = area.dataset.desc;
