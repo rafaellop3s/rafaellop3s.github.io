@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="theme-color" content="#06101d" />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" content="#06101d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f7fb" media="(prefers-color-scheme: light)">
 <title>Rafael Lopes</title>
 
 <style>
@@ -148,6 +150,7 @@ h1{
     font-size:1.08rem;
     margin-bottom:34px;
     animation-delay:1.22s;
+    text-shadow:0 0 10px rgba(31,117,255,.16);
 }
 
 /* Contatos */
@@ -336,6 +339,20 @@ h1{
     letter-spacing:.8px;
 }
 
+.tri-icon{
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(68%)
+        sepia(88%)
+        saturate(1398%)
+        hue-rotate(345deg)
+        brightness(103%)
+        contrast(105%);
+    opacity:.98;
+    drop-shadow:0 0 12px rgba(255,157,46,.28);
+}
+
 .info-panel{
     max-width:780px;
     margin:26px auto 0;
@@ -404,17 +421,6 @@ h1{
     padding:8px 12px;
     border-radius:999px;
     font-size:.85rem;
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(18px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
 }
 
 /* Modal */
@@ -551,6 +557,17 @@ h1{
 
 .toast.show{
     display:block;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 @media (max-width: 900px){
@@ -742,29 +759,37 @@ h1{
 
                 <g class="area active" data-title="DADOS" data-sub="data analytics" data-desc="Análise de dados, SQL, dashboards e indicadores para apoiar decisões mais sólidas e consistentes." data-badges="SQL|Dashboards|KPIs|BI">
                     <polygon class="region top-fill" points="500,20 260,420 740,420"></polygon>
-                    <text x="500" y="188" text-anchor="middle" class="label" font-size="42" filter="url(#softGlow)">DADOS</text>
-                    <text x="500" y="240" text-anchor="middle" class="label-small">data analytics</text>
+                    <circle cx="500" cy="118" r="58" fill="rgba(255,157,46,.13)"></circle>
+                    <image href="data.png" x="450" y="68" width="100" height="100" preserveAspectRatio="xMidYMid meet" class="tri-icon"></image>
+                    <text x="500" y="246" text-anchor="middle" class="label" font-size="42" filter="url(#softGlow)">DADOS</text>
+                    <text x="500" y="298" text-anchor="middle" class="label-small">data analytics</text>
                 </g>
 
                 <g class="area" data-title="AUTOMAÇÃO" data-sub="automation" data-desc="Integrações, Python, APIs e automação de tarefas para reduzir trabalho manual e aumentar produtividade." data-badges="Python|APIs|Integrações|Processos">
                     <polygon class="region left-fill" points="20,840 260,420 500,840"></polygon>
-                    <text x="265" y="620" text-anchor="middle" class="label" font-size="40" filter="url(#softGlow)">AUTOMAÇÃO</text>
-                    <text x="265" y="672" text-anchor="middle" class="label-small">automation</text>
+                    <circle cx="260" cy="560" r="58" fill="rgba(255,157,46,.13)"></circle>
+                    <image href="automation.png" x="210" y="510" width="100" height="100" preserveAspectRatio="xMidYMid meet" class="tri-icon"></image>
+                    <text x="260" y="670" text-anchor="middle" class="label" font-size="40" filter="url(#softGlow)">AUTOMAÇÃO</text>
+                    <text x="260" y="722" text-anchor="middle" class="label-small">automation</text>
                 </g>
 
                 <g class="area" data-title="GESTÃO FINANCEIRA" data-sub="financial operations" data-desc="Fluxo de caixa, indicadores financeiros, controle operacional e apoio à gestão com visão de negócio." data-badges="Fluxo de Caixa|Indicadores|Gestão|Controle">
                     <polygon class="region right-fill" points="980,840 740,420 500,840"></polygon>
-                    <text x="735" y="620" text-anchor="middle" class="label" font-size="34" filter="url(#softGlow)">GESTÃO FINANCEIRA</text>
-                    <text x="735" y="672" text-anchor="middle" class="label-small">financial operations</text>
+                    <circle cx="740" cy="560" r="58" fill="rgba(255,157,46,.13)"></circle>
+                    <image href="finance.png" x="690" y="510" width="100" height="100" preserveAspectRatio="xMidYMid meet" class="tri-icon"></image>
+                    <text x="740" y="670" text-anchor="middle" class="label" font-size="34" filter="url(#softGlow)">GESTÃO FINANCEIRA</text>
+                    <text x="740" y="722" text-anchor="middle" class="label-small">financial operations</text>
                 </g>
 
                 <g class="area" data-title="INTELIGÊNCIA DE NEGÓCIOS" data-sub="business intelligence" data-desc="A interseção entre automação, dados e finanças. Onde a informação vira decisão e processo." data-badges="Estratégia|Decisão|Insights|Eficiência">
                     <polygon class="region center-fill" points="260,420 740,420 500,840"></polygon>
-                    <text x="500" y="500" text-anchor="middle" class="label" font-size="31" filter="url(#softGlow)">
+                    <circle cx="500" cy="560" r="58" fill="rgba(255,157,46,.13)"></circle>
+                    <image href="bi.png" x="450" y="510" width="100" height="100" preserveAspectRatio="xMidYMid meet" class="tri-icon"></image>
+                    <text x="500" y="690" text-anchor="middle" class="label" font-size="31" filter="url(#softGlow)">
                         <tspan x="500" dy="0">INTELIGÊNCIA</tspan>
                         <tspan x="500" dy="38">DE NEGÓCIOS</tspan>
                     </text>
-                    <text x="500" y="598" text-anchor="middle" class="label-small">business intelligence</text>
+                    <text x="500" y="790" text-anchor="middle" class="label-small">business intelligence</text>
                 </g>
 
                 <polyline points="500,20 260,420 20,840" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
@@ -797,7 +822,6 @@ h1{
     </section>
 </main>
 
-<!-- Modal -->
 <div class="modal" id="contactsModal" aria-hidden="true">
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
