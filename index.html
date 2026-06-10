@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -12,160 +13,231 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+}
+
+html{
+    overflow-x:hidden;
 }
 
 body{
-    background:#050505;
-    color:white;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    font-family:'Segoe UI',sans-serif;
+    background:#080808;
+    color:#ffffff;
     overflow-x:hidden;
+    min-height:100vh;
     position:relative;
 }
 
+/* Fundo futurista */
+
 body::before{
     content:"";
-    position:absolute;
-    width:600px;
-    height:600px;
-    background:#0066ff;
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:#6D214F;
     border-radius:50%;
-    filter:blur(220px);
-    opacity:.12;
-    z-index:0;
+    filter:blur(180px);
+    opacity:.18;
+    left:-150px;
+    top:-100px;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:#4A148C;
+    border-radius:50%;
+    filter:blur(180px);
+    opacity:.18;
+    right:-150px;
+    bottom:-100px;
+    z-index:-2;
 }
 
 .container{
-    max-width:1000px;
     width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:60px 25px;
     text-align:center;
-    padding:40px 20px;
-    z-index:1;
 }
 
-.boot,
-h1,
-.main-title,
-.subtitle,
-.typing,
-.buttons,
-.cards{
-    opacity:0;
-}
+/* Entrada */
 
 .boot{
-    color:#00ffb7;
+    color:#d7b6ff;
     font-family:monospace;
-    margin-bottom:30px;
-    animation:fadeIn .8s ease forwards;
+    margin-bottom:25px;
+    opacity:0;
+    animation:fadeUp .8s forwards;
 }
 
 h1{
     font-size:clamp(3rem,10vw,6rem);
     letter-spacing:4px;
+    font-weight:800;
     margin-bottom:15px;
-    animation:fadeIn .8s ease forwards;
-    animation-delay:.5s;
+    opacity:0;
+    animation:fadeUp .8s .4s forwards;
 }
 
 .main-title{
-    font-size:clamp(1.2rem,3vw,2rem);
-    margin-bottom:15px;
-    animation:fadeIn .8s ease forwards;
-    animation-delay:1s;
+    font-size:clamp(1rem,3vw,1.5rem);
+    color:#f3f3f3;
+    margin-bottom:12px;
+    opacity:0;
+    animation:fadeUp .8s .8s forwards;
 }
 
 .subtitle{
-    color:#8d8d8d;
-    font-size:1rem;
-    margin-bottom:40px;
-    animation:fadeIn .8s ease forwards;
-    animation-delay:1.5s;
+    color:#9c9c9c;
+    margin-bottom:8px;
+    opacity:0;
+    animation:fadeUp .8s 1.2s forwards;
+}
+
+.subtitle-en{
+    color:#666;
+    font-size:.9rem;
+    margin-bottom:35px;
+    letter-spacing:1px;
+    opacity:0;
+    animation:fadeUp .8s 1.4s forwards;
 }
 
 .typing{
-    color:#00ffb7;
     min-height:40px;
-    font-size:1.2rem;
+    color:#d7b6ff;
+    font-size:1.15rem;
     margin-bottom:40px;
-    animation:fadeIn .8s ease forwards;
-    animation-delay:2s;
+    opacity:0;
+    animation:fadeUp .8s 1.8s forwards;
 }
+
+/* Botões */
 
 .buttons{
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
     gap:15px;
-    margin-bottom:60px;
-    animation:fadeIn .8s ease forwards;
-    animation-delay:2.5s;
+    margin-bottom:70px;
+    opacity:0;
+    animation:fadeUp .8s 2.2s forwards;
 }
 
 .btn{
     text-decoration:none;
     color:white;
-    border:1px solid #1e90ff;
+    border:1px solid #6D214F;
     padding:14px 28px;
-    border-radius:12px;
+    border-radius:14px;
     transition:.3s;
+    background:rgba(255,255,255,.02);
 }
 
 .btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(30,144,255,.5);
+    transform:translateY(-4px);
+    border-color:#a855f7;
+    box-shadow:0 0 25px rgba(168,85,247,.35);
 }
 
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    animation:fadeIn .8s ease forwards;
-    animation-delay:3s;
+/* Círculos */
+
+.circle-section{
+    opacity:0;
+    animation:fadeUp .8s 2.8s forwards;
 }
 
-.card{
-    background:rgba(255,255,255,.03);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;
+.circle-title{
+    font-size:1.6rem;
+    margin-bottom:50px;
+}
+
+.circle-container{
+    position:relative;
+    width:100%;
+    max-width:650px;
+    height:420px;
+    margin:auto;
+}
+
+.circle{
+    position:absolute;
+    width:240px;
+    height:240px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
     padding:25px;
-    transition:.3s;
+    transition:.4s;
+    cursor:pointer;
+    backdrop-filter:blur(8px);
 }
 
-.card:hover{
-    transform:translateY(-5px);
-    border-color:#00ffb7;
-    box-shadow:0 0 20px rgba(0,255,183,.15);
+.circle:hover{
+    transform:scale(1.05);
 }
 
-.card h3{
-    margin-bottom:12px;
-    font-size:1.3rem;
+.circle h3{
+    font-size:1.2rem;
+    margin-bottom:8px;
 }
 
-.card p{
-    color:#b8b8b8;
-    line-height:1.6;
+.circle small{
+    display:block;
+    color:#cccccc;
+    margin-bottom:10px;
 }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.circle p{
+    font-size:.85rem;
+    line-height:1.4;
+    color:#efefef;
 }
+
+.auto{
+    left:0;
+    top:0;
+    background:rgba(109,33,79,.55);
+}
+
+.data{
+    right:0;
+    top:0;
+    background:rgba(74,20,140,.55);
+}
+
+.finance{
+    left:50%;
+    transform:translateX(-50%);
+    bottom:0;
+    background:rgba(120,20,80,.55);
+}
+
+.center-label{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    font-size:1.2rem;
+    font-weight:700;
+    letter-spacing:1px;
+    z-index:5;
+}
+
+/* Responsivo */
 
 @media(max-width:768px){
 
     .container{
-        padding:30px 20px;
+        padding:40px 20px;
     }
 
     .buttons{
@@ -174,29 +246,75 @@ h1{
     }
 
     .btn{
-        width:220px;
+        width:240px;
+    }
+
+    .circle-container{
+        height:auto;
+        display:flex;
+        flex-direction:column;
+        gap:25px;
+        align-items:center;
+    }
+
+    .circle{
+        position:relative;
+        left:auto;
+        right:auto;
+        top:auto;
+        bottom:auto;
+        transform:none;
+        width:280px;
+        height:280px;
+    }
+
+    .finance{
+        transform:none;
+    }
+
+    .center-label{
+        display:none;
     }
 
 }
 
+/* Animações */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
 <div class="boot">
-> initializing profile...
+> inicializando perfil...
 </div>
 
 <h1>RAFAEL LOPES</h1>
 
 <div class="main-title">
-Soluções Inteligentes para Processos e Dados
+Python • SQL • BI • Automação • Finanças
 </div>
 
 <div class="subtitle">
-Data Analyst | Python | SQL | Business Intelligence | Financial Operations
+Analista de Dados • Inteligência de Negócios • Operações Financeiras
+</div>
+
+<div class="subtitle-en">
+Data Analyst | Business Intelligence | Financial Operations
 </div>
 
 <div class="typing" id="typing"></div>
@@ -223,27 +341,54 @@ WhatsApp
 
 </div>
 
-<div class="cards">
+<div class="circle-section">
 
-<div class="card">
-<h3>Automação</h3>
-<p>
-Desenvolvimento de soluções em Python para reduzir tarefas repetitivas, integrar sistemas e aumentar produtividade.
-</p>
+<div class="circle-title">
+Áreas de Atuação
 </div>
 
-<div class="card">
-<h3>Dados</h3>
-<p>
-Análise de dados, SQL, dashboards e indicadores para apoiar decisões estratégicas.
-</p>
+<div class="circle-container">
+
+<div class="center-label">
+INTELIGÊNCIA<br>DE NEGÓCIOS
 </div>
 
-<div class="card">
-<h3>Financeiro</h3>
+<div class="circle auto">
+<div>
+<h3>AUTOMAÇÃO</h3>
+<small>automation</small>
 <p>
-Mais de 10 anos de experiência em processos administrativos, financeiros e melhoria operacional.
+Python, integrações,
+APIs e otimização
+de processos.
 </p>
+</div>
+</div>
+
+<div class="circle data">
+<div>
+<h3>DADOS</h3>
+<small>data analytics</small>
+<p>
+SQL, dashboards,
+KPIs e análise
+de dados.
+</p>
+</div>
+</div>
+
+<div class="circle finance">
+<div>
+<h3>FINANÇAS</h3>
+<small>financial operations</small>
+<p>
+Fluxo de caixa,
+indicadores e
+gestão operacional.
+</p>
+</div>
+</div>
+
 </div>
 
 </div>
@@ -253,10 +398,10 @@ Mais de 10 anos de experiência em processos administrativos, financeiros e melh
 <script>
 
 const phrases = [
-"Transformando processos manuais em soluções inteligentes.",
-"Automação de tarefas repetitivas.",
-"Dados que apoiam decisões.",
-"Python • SQL • BI • Processos."
+"Transformando dados em decisões",
+"Automatizando processos e operações",
+"Unindo tecnologia e negócios",
+"Python • SQL • BI • Finanças"
 ];
 
 let currentPhrase = 0;
@@ -269,32 +414,49 @@ function typeEffect(){
     const phrase = phrases[currentPhrase];
 
     if(!deleting){
-        element.textContent = phrase.substring(0,currentLetter+1);
+
+        element.textContent =
+        phrase.substring(0,currentLetter+1);
+
         currentLetter++;
 
         if(currentLetter === phrase.length){
+
             deleting = true;
+
             setTimeout(typeEffect,1800);
+
             return;
         }
+
     }else{
-        element.textContent = phrase.substring(0,currentLetter-1);
+
+        element.textContent =
+        phrase.substring(0,currentLetter-1);
+
         currentLetter--;
 
         if(currentLetter === 0){
+
             deleting = false;
+
             currentPhrase++;
 
             if(currentPhrase >= phrases.length){
+
                 currentPhrase = 0;
+
             }
+
         }
+
     }
 
     setTimeout(typeEffect,deleting ? 40 : 80);
+
 }
 
-setTimeout(typeEffect,2500);
+setTimeout(typeEffect,2200);
 
 </script>
 
