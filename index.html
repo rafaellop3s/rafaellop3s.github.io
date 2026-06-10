@@ -32,10 +32,11 @@
 html{
     overflow-x:hidden;
     scroll-behavior:smooth;
+    background:var(--bg);
 }
 
 body{
-    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:"Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     background:
         radial-gradient(circle at top left, rgba(31,117,255,.15), transparent 30%),
         radial-gradient(circle at top right, rgba(255,157,46,.10), transparent 24%),
@@ -45,6 +46,7 @@ body{
     overflow-x:hidden;
     position:relative;
     overscroll-behavior-x:none;
+    -webkit-text-size-adjust:100%;
 }
 
 body::before{
@@ -100,7 +102,7 @@ h1,
 
 .boot{
     color:#a7d5ff;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size:.95rem;
     margin-bottom:22px;
     animation-delay:.08s;
@@ -151,11 +153,11 @@ h1{
 /* Contatos */
 .contact-grid{
     display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
+    grid-template-columns:repeat(4, minmax(0, 1fr));
     gap:14px;
     margin:0 auto 54px;
     animation-delay:1.5s;
-    max-width:980px;
+    max-width:1100px;
 }
 
 .contact-card{
@@ -282,6 +284,7 @@ h1{
     user-select:none;
     -webkit-user-select:none;
     -webkit-touch-callout:none;
+    touch-action:manipulation;
 }
 
 .area{
@@ -318,11 +321,6 @@ h1{
     fill:rgba(10, 25, 44, .95);
 }
 
-.top-fill{}
-.left-fill{}
-.right-fill{}
-.center-fill{}
-
 .label{
     fill:#f5f8ff;
     font-weight:800;
@@ -336,12 +334,6 @@ h1{
     fill:#b7c9de;
     font-size:22px;
     letter-spacing:.8px;
-}
-
-.label-desc{
-    fill:#eef5ff;
-    font-size:18px;
-    line-height:1.4;
 }
 
 .info-panel{
@@ -425,6 +417,142 @@ h1{
     }
 }
 
+/* Modal */
+.modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:50;
+}
+
+.modal.open{
+    display:flex;
+}
+
+.modal-backdrop{
+    position:absolute;
+    inset:0;
+    background:rgba(2, 8, 16, .72);
+    backdrop-filter:blur(8px);
+}
+
+.modal-card{
+    position:relative;
+    width:min(100%, 560px);
+    background:linear-gradient(180deg, rgba(9,26,47,.96), rgba(7,18,33,.98));
+    border:1px solid rgba(135,183,255,.22);
+    border-radius:22px;
+    box-shadow:0 24px 60px rgba(0,0,0,.38);
+    padding:22px;
+    text-align:left;
+}
+
+.modal-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg, rgba(31,117,255,.95), rgba(255,157,46,.85));
+    border-radius:22px 22px 0 0;
+}
+
+.modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.modal-title{
+    font-size:1.2rem;
+    font-weight:800;
+}
+
+.close-btn{
+    border:none;
+    background:rgba(255,255,255,.05);
+    color:#e8f2ff;
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    font-size:1.2rem;
+    cursor:pointer;
+}
+
+.contact-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 14px;
+    border-radius:16px;
+    border:1px solid rgba(135,183,255,.18);
+    background:rgba(255,255,255,.02);
+    margin-bottom:12px;
+}
+
+.contact-item:last-child{
+    margin-bottom:0;
+}
+
+.contact-meta{
+    min-width:0;
+}
+
+.contact-meta strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.contact-meta span{
+    display:block;
+    color:#9fb1c6;
+    font-size:.9rem;
+    word-break:break-word;
+}
+
+.copy-btn{
+    border:1px solid rgba(255,157,46,.30);
+    background:linear-gradient(180deg, rgba(255,157,46,.14), rgba(31,117,255,.08));
+    color:#f7fbff;
+    border-radius:12px;
+    padding:10px 14px;
+    min-width:92px;
+    cursor:pointer;
+    transition:.2s ease;
+    flex:0 0 auto;
+}
+
+.copy-btn:hover{
+    transform:translateY(-1px);
+    border-color:rgba(255,157,46,.55);
+}
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    background:rgba(9,26,47,.95);
+    color:#fff;
+    border:1px solid rgba(255,157,46,.28);
+    padding:11px 16px;
+    border-radius:999px;
+    box-shadow:0 12px 28px rgba(0,0,0,.28);
+    z-index:70;
+    display:none;
+}
+
+.toast.show{
+    display:block;
+}
+
 @media (max-width: 900px){
     .contact-grid{
         grid-template-columns:1fr;
@@ -464,15 +592,15 @@ h1{
     }
 
     .label{
-        font-size:24px;
+        font-size:22px;
     }
 
     .label-small{
-        font-size:18px;
+        font-size:17px;
     }
 
-    .label-desc{
-        font-size:15px;
+    .copy-btn{
+        min-width:82px;
     }
 }
 
@@ -495,8 +623,32 @@ h1{
         font-size:1rem;
         min-height:34px;
     }
-}
 
+    .contact-card{
+        padding:14px;
+    }
+
+    .contact-content strong{
+        font-size:.98rem;
+    }
+
+    .contact-content small{
+        font-size:.8rem;
+    }
+
+    .modal-card{
+        padding:18px;
+    }
+
+    .contact-item{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .copy-btn{
+        width:100%;
+    }
+}
 </style>
 </head>
 <body>
@@ -523,7 +675,7 @@ h1{
             </div>
             <div class="contact-content">
                 <strong>GitHub</strong>
-                <small>Repositórios e código</small>
+                <small>Projetos em andamento e testes</small>
             </div>
             <div class="contact-arrow">→</div>
         </a>
@@ -538,7 +690,7 @@ h1{
             </div>
             <div class="contact-content">
                 <strong>Instagram</strong>
-                <small>Conteúdo e contato direto</small>
+                <small>Conteúdo pessoal e rotina</small>
             </div>
             <div class="contact-arrow">→</div>
         </a>
@@ -553,7 +705,21 @@ h1{
             </div>
             <div class="contact-content">
                 <strong>WhatsApp</strong>
-                <small>Atendimento e orçamento</small>
+                <small>Contato direto</small>
+            </div>
+            <div class="contact-arrow">→</div>
+        </a>
+
+        <a class="contact-card" href="#" id="moreContactsBtn">
+            <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3v18"></path>
+                    <path d="M3 12h18"></path>
+                </svg>
+            </div>
+            <div class="contact-content">
+                <strong>Mais contatos</strong>
+                <small>E-mail, telefone e LinkedIn</small>
             </div>
             <div class="contact-arrow">→</div>
         </a>
@@ -576,8 +742,8 @@ h1{
 
                 <g class="area active" data-title="DADOS" data-sub="data analytics" data-desc="Análise de dados, SQL, dashboards e indicadores para apoiar decisões mais sólidas e consistentes." data-badges="SQL|Dashboards|KPIs|BI">
                     <polygon class="region top-fill" points="500,20 260,420 740,420"></polygon>
-                    <text x="500" y="180" text-anchor="middle" class="label" font-size="42" filter="url(#softGlow)">DADOS</text>
-                    <text x="500" y="232" text-anchor="middle" class="label-small">data analytics</text>
+                    <text x="500" y="188" text-anchor="middle" class="label" font-size="42" filter="url(#softGlow)">DADOS</text>
+                    <text x="500" y="240" text-anchor="middle" class="label-small">data analytics</text>
                 </g>
 
                 <g class="area" data-title="AUTOMAÇÃO" data-sub="automation" data-desc="Integrações, Python, APIs e automação de tarefas para reduzir trabalho manual e aumentar produtividade." data-badges="Python|APIs|Integrações|Processos">
@@ -588,7 +754,7 @@ h1{
 
                 <g class="area" data-title="GESTÃO FINANCEIRA" data-sub="financial operations" data-desc="Fluxo de caixa, indicadores financeiros, controle operacional e apoio à gestão com visão de negócio." data-badges="Fluxo de Caixa|Indicadores|Gestão|Controle">
                     <polygon class="region right-fill" points="980,840 740,420 500,840"></polygon>
-                    <text x="735" y="620" text-anchor="middle" class="label" font-size="36" filter="url(#softGlow)">GESTÃO FINANCEIRA</text>
+                    <text x="735" y="620" text-anchor="middle" class="label" font-size="34" filter="url(#softGlow)">GESTÃO FINANCEIRA</text>
                     <text x="735" y="672" text-anchor="middle" class="label-small">financial operations</text>
                 </g>
 
@@ -630,6 +796,43 @@ h1{
         </div>
     </section>
 </main>
+
+<!-- Modal -->
+<div class="modal" id="contactsModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-head">
+            <div class="modal-title" id="modalTitle">Mais contatos</div>
+            <button class="close-btn" id="closeModalBtn" aria-label="Fechar">×</button>
+        </div>
+
+        <div class="contact-item">
+            <div class="contact-meta">
+                <strong>E-mail</strong>
+                <span id="emailValue">rafael-lopesoliveira@hotmail.com</span>
+            </div>
+            <button class="copy-btn" data-copy="emailValue">Copiar</button>
+        </div>
+
+        <div class="contact-item">
+            <div class="contact-meta">
+                <strong>Telefone</strong>
+                <span id="phoneValue">+55 69 99994-7214</span>
+            </div>
+            <button class="copy-btn" data-copy="phoneValue">Copiar</button>
+        </div>
+
+        <div class="contact-item">
+            <div class="contact-meta">
+                <strong>LinkedIn</strong>
+                <span id="linkedinValue">https://www.linkedin.com/in/rafaellop3s/</span>
+            </div>
+            <button class="copy-btn" data-copy="linkedinValue">Copiar</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast">Copiado</div>
 
 <script>
 const phrases = [
@@ -694,6 +897,75 @@ areas.forEach(area => {
     });
 });
 
+// Modal contatos
+const modal = document.getElementById("contactsModal");
+const openBtn = document.getElementById("moreContactsBtn");
+const closeBtn = document.getElementById("closeModalBtn");
+const backdrop = document.getElementById("modalBackdrop");
+const toast = document.getElementById("toast");
+
+function openModal(e){
+    e.preventDefault();
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+}
+
+function closeModal(){
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+}
+
+openBtn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
+backdrop.addEventListener("click", closeModal);
+
+document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeModal();
+});
+
+function showToast(message = "Copiado"){
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1300);
+}
+
+async function copyText(text){
+    try{
+        await navigator.clipboard.writeText(text);
+        showToast("Copiado");
+    }catch{
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("Copiado");
+    }
+}
+
+document.querySelectorAll(".copy-btn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+        const id = btn.getAttribute("data-copy");
+        const value = document.getElementById(id).textContent.trim();
+
+        await copyText(value);
+
+        const original = btn.textContent;
+        btn.textContent = "Copiado";
+        btn.disabled = true;
+
+        setTimeout(() => {
+            btn.textContent = original;
+            btn.disabled = false;
+        }, 1200);
+    });
+});
 </script>
 </body>
 </html>
