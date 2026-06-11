@@ -94,8 +94,7 @@ h1,
 .subtitle-en,
 .typing,
 .contact-grid,
-.triangle-section,
-.triangle-note,
+.carousel-section,
 .info-panel{
     opacity:0;
     animation:fadeUp .8s ease forwards;
@@ -254,93 +253,171 @@ h1{
     opacity:.9;
 }
 
-/* Seção do triângulo */
-.triangle-section{
+/* Carrossel de cards */
+.carousel-section{
     animation-delay:1.92s;
 }
 
-.triangle-note{
-    color:#dbe9ff;
-    font-size:1.3rem;
-    font-weight:700;
-    margin-bottom:18px;
-    letter-spacing:.2px;
-    animation-delay:2.1s;
-}
-
-.triangle-wrap{
-    width:100%;
-    max-width:980px;
+.carousel-container{
+    position:relative;
+    max-width:880px;
     margin:0 auto;
-    padding:14px 10px 0;
+    padding:0 44px;
 }
 
-.triangle-svg{
-    width:100%;
-    height:auto;
-    display:block;
-    overflow:visible;
+.carousel-track{
+    display:flex;
+    gap:16px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    padding:8px 4px 12px;
+    scroll-behavior:smooth;
+}
+
+.carousel-track::-webkit-scrollbar{
+    display:none;
+}
+
+.carousel-card{
+    flex:0 0 calc(33.333% - 11px);
+    min-width:230px;
+    scroll-snap-align:start;
+    background:var(--panel);
+    border:1px solid rgba(135,183,255,.12);
+    border-radius:18px;
+    padding:30px 18px 24px;
+    text-align:center;
+    cursor:pointer;
+    transition:all .35s ease;
+    position:relative;
     user-select:none;
-    -webkit-user-select:none;
-    -webkit-touch-callout:none;
+    -webkit-tap-highlight-color:transparent;
     touch-action:manipulation;
 }
 
-.area{
-    cursor:pointer;
-    transition:filter .2s ease, transform .2s ease;
-    transform-box:fill-box;
-    transform-origin:center;
-    outline:none;
-    -webkit-tap-highlight-color:transparent;
+.carousel-card:hover{
+    border-color:rgba(62,160,255,.30);
 }
 
-.area:hover{
-    filter:brightness(1.05);
+.carousel-card.active{
+    border-color:var(--blue);
+    box-shadow:
+        0 0 0 1px rgba(31,117,255,.12) inset,
+        0 12px 32px rgba(31,117,255,.10);
+    background:var(--panel-strong);
 }
 
-.area.active{
-    filter:brightness(1.18) saturate(1.12);
+.carousel-card:not(.active){
+    opacity:.6;
+    transform:scale(.92);
 }
 
-.region{
-    stroke:rgba(182, 211, 255, .22);
-    stroke-width:3;
-    paint-order:stroke fill;
-    transition:fill .25s ease, stroke .25s ease, filter .25s ease;
+.card-icon{
+    width:54px;
+    height:54px;
+    margin:0 auto 13px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--orange-soft);
+    border:1px solid rgba(255,157,46,.22);
+    transition:all .3s ease;
 }
 
-.area.active .region{
-    stroke:rgba(126, 200, 255, .8);
-    fill:rgba(31,117,255,.50);
-    filter:drop-shadow(0 0 14px rgba(31,117,255,.34));
+.carousel-card.active .card-icon{
+    border-color:rgba(255,157,46,.40);
+    box-shadow:0 0 18px rgba(255,157,46,.12);
 }
 
-.area:not(.active) .region{
-    fill:rgba(10, 25, 44, .95);
+.card-icon svg{
+    width:27px;
+    height:27px;
+    stroke:var(--orange);
+    fill:none;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
 
-.label{
-    fill:#f5f8ff;
-    font-weight:800;
-    letter-spacing:1px;
-    paint-order:stroke fill;
-    stroke:rgba(0,0,0,.25);
-    stroke-width:2;
+.card-label{
+    font-size:1.02rem;
+    font-weight:700;
+    letter-spacing:.5px;
+    margin-bottom:3px;
+    color:var(--text);
 }
 
-.label-small{
-    fill:#b7c9de;
-    font-size:22px;
+.card-sub{
+    font-size:.8rem;
+    color:var(--muted);
+    text-transform:uppercase;
     letter-spacing:.8px;
 }
 
-.tri-icon{
-    filter:
-        drop-shadow(0 0 8px rgba(255,157,46,.35))
-        drop-shadow(0 0 18px rgba(255,157,46,.18));
-    opacity:.98;
+.carousel-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid rgba(135,183,255,.18);
+    background:var(--panel-strong);
+    color:var(--text);
+    font-size:1.5rem;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:all .2s ease;
+    z-index:2;
+    backdrop-filter:blur(8px);
+    line-height:1;
+    padding:0 0 2px;
 }
+
+.carousel-arrow:hover{
+    border-color:rgba(62,160,255,.45);
+    box-shadow:0 0 20px rgba(31,117,255,.12);
+}
+
+.carousel-arrow--prev{
+    left:-16px;
+}
+
+.carousel-arrow--next{
+    right:-16px;
+}
+
+.carousel-dots{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:18px;
+}
+
+.carousel-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    border:none;
+    background:rgba(135,183,255,.16);
+    cursor:pointer;
+    transition:all .3s ease;
+    padding:0;
+}
+
+.carousel-dot.active{
+    background:var(--blue);
+    width:28px;
+    border-radius:5px;
+    box-shadow:0 0 12px rgba(31,117,255,.2);
+}
+
 .info-panel{
     max-width:780px;
     margin:26px auto 0;
@@ -564,18 +641,18 @@ h1{
         max-width:640px;
     }
 
-    .triangle-note{
-        font-size:1.18rem;
-    }
-}
-
-    @media(max-width:768px){
-
-    .triangle-wrap{
-        max-width:85%;
-        margin:auto;
+    .carousel-container{
+        padding:0 18px;
     }
 
+    .carousel-card{
+        flex:0 0 75%;
+        min-width:0;
+    }
+
+    .carousel-arrow{
+        display:none;
+    }
 }
     
 @media (max-width: 768px){
@@ -603,14 +680,6 @@ h1{
 
     .info-desc{
         font-size:.96rem;
-    }
-
-    .label{
-        font-size:22px;
-    }
-
-    .label-small{
-        font-size:17px;
     }
 
     .copy-btn{
@@ -733,51 +802,56 @@ h1{
         </a>
     </div>
 
-    <section class="triangle-section" aria-label="Áreas de atuação">
-
-        <div class="triangle-wrap">
-            <svg class="triangle-svg" viewBox="0 0 1000 860" role="img" aria-label="Triângulo com áreas de atuação em Automação, Dados, Gestão Financeira e Inteligência de Negócios">
-                <defs>
-                    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
-                        <feMerge>
-                            <feMergeNode in="blur"></feMergeNode>
-                            <feMergeNode in="SourceGraphic"></feMergeNode>
-                        </feMerge>
-                    </filter>
-                </defs>
-
-                <g class="area active" data-title="DADOS" data-sub="Data Analytics" data-desc="Análise de dados, SQL, dashboards e indicadores para apoiar decisões mais sólidas e consistentes." data-badges="SQL|Dashboards|KPIs|BI">
-                    <polygon class="region top-fill" points="500,20 260,420 740,420"></polygon>
-                    <circle cx="500" cy="250" r="58" fill="rgba(255,157,46,.13)"></circle>
-                    <image href="data.png" x="450" y="200" width="100" height="100"></image>
-                </g>
-
-                <g class="area" data-title="AUTOMAÇÃO" data-sub="Automation" data-desc="Integrações, Python, APIs e automação de tarefas para reduzir trabalho manual e aumentar produtividade." data-badges="Python|APIs|Integrações|Processos">
-                    <polygon class="region left-fill" points="20,840 260,420 500,840"></polygon>
-                    <circle cx="260" cy="640" r="58" fill="rgba(255,157,46,.13)"></circle>
-                    <image href="automation.png" x="220" y="590" width="100" height="100"></image>
-                </g>
-
-                <g class="area" data-title="GESTÃO FINANCEIRA" data-sub="Financial Operations" data-desc="Fluxo de caixa, indicadores financeiros, controle operacional e apoio à gestão com visão de negócio." data-badges="Fluxo de Caixa|Indicadores|Gestão|Controle">
-                    <polygon class="region right-fill" points="980,840 740,420 500,840"></polygon>
-                    <circle cx="740" cy="640" r="58" fill="rgba(255,157,46,.13)"></circle>
-                    <image href="finance.png" x="700" y="590" width="100" height="100""></image>
-                </g>
-
-                <g class="area" data-title="INTELIGÊNCIA DE NEGÓCIOS" data-sub="Business Intelligence" data-desc="A interseção entre automação, dados e finanças. Onde a informação vira decisão e processo." data-badges="Estratégia|Decisão|Insights|Eficiência">
-                    <polygon class="region center-fill" points="260,420 740,420 500,840"></polygon>
-                    <circle cx="500" cy="560" r="58" fill="rgba(255,157,46,.13)"></circle>
-                    <image href="bi.png" x="460" y="510" width="100" height="100""></image>
-                </g>
-
-                <polyline points="500,20 260,420 20,840" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
-                <polyline points="500,20 740,420 980,840" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
-                <polyline points="260,420 740,420" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
-                <polyline points="260,420 500,840 740,420" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
-                <polyline points="20,840 980,840" fill="none" stroke="rgba(182,211,255,.22)" stroke-width="3"></polyline>
-            </svg>
+    <section class="carousel-section" aria-label="Áreas de atuação">
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-card active" data-title="DADOS" data-sub="Data Analytics" data-desc="Análise de dados, SQL, dashboards e indicadores para apoiar decisões mais sólidas e consistentes." data-badges="SQL|Dashboards|KPIs|BI">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="6" y="11" width="3" height="8" rx="1"></rect>
+                            <rect x="10.5" y="7" width="3" height="12" rx="1"></rect>
+                            <rect x="15" y="3" width="3" height="16" rx="1"></rect>
+                        </svg>
+                    </div>
+                    <div class="card-label">DADOS</div>
+                    <div class="card-sub">data analytics</div>
+                </div>
+                <div class="carousel-card" data-title="AUTOMAÇÃO" data-sub="Automation" data-desc="Integrações, Python, APIs e automação de tarefas para reduzir trabalho manual e aumentar produtividade." data-badges="Python|APIs|Integrações|Processos">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                    </div>
+                    <div class="card-label">AUTOMAÇÃO</div>
+                    <div class="card-sub">automation</div>
+                </div>
+                <div class="carousel-card" data-title="GESTÃO FINANCEIRA" data-sub="Financial Operations" data-desc="Fluxo de caixa, indicadores financeiros, controle operacional e apoio à gestão com visão de negócio." data-badges="Fluxo de Caixa|Indicadores|Gestão|Controle">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="card-label">GESTÃO FINANCEIRA</div>
+                    <div class="card-sub">financial operations</div>
+                </div>
+                <div class="carousel-card" data-title="INTELIGÊNCIA DE NEGÓCIOS" data-sub="Business Intelligence" data-desc="A interseção entre automação, dados e finanças para transformar informação em decisão." data-badges="Estratégia|Decisão|Insights|Eficiência">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 18h6"></path>
+                            <path d="M10 22h4"></path>
+                            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                        </svg>
+                    </div>
+                    <div class="card-label">INTELIGÊNCIA DE NEGÓCIOS</div>
+                    <div class="card-sub">business intelligence</div>
+                </div>
+            </div>
+            <button class="carousel-arrow carousel-arrow--prev" id="prevBtn" aria-label="Anterior">‹</button>
+            <button class="carousel-arrow carousel-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
         </div>
+        <div class="carousel-dots" id="carouselDots"></div>
 
         <div class="info-panel" id="infoPanel">
             <div class="info-top">
@@ -786,11 +860,9 @@ h1{
                     <div class="info-sub" id="infoSub">Data Analytics</div>
                 </div>
             </div>
-
             <div class="info-desc" id="infoDesc">
                 Análise de dados, SQL, dashboards e indicadores para apoiar decisões mais sólidas e consistentes.
             </div>
-
             <div class="info-badges" id="infoBadges">
                 <span class="badge">SQL</span>
                 <span class="badge">Dashboards</span>
@@ -877,28 +949,75 @@ function typeEffect(){
 
 setTimeout(typeEffect, 1800);
 
-const areas = document.querySelectorAll(".area");
-const infoTitle = document.getElementById("infoTitle");
-const infoSub = document.getElementById("infoSub");
-const infoDesc = document.getElementById("infoDesc");
-const infoBadges = document.getElementById("infoBadges");
+// Carrossel
+const track = document.getElementById('carouselTrack');
+const cards = Array.from(track.querySelectorAll('.carousel-card'));
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const dotsContainer = document.getElementById('carouselDots');
+const infoTitle = document.getElementById('infoTitle');
+const infoSub = document.getElementById('infoSub');
+const infoDesc = document.getElementById('infoDesc');
+const infoBadges = document.getElementById('infoBadges');
+let currentIndex = 0;
 
-function setInfo(area){
-    infoTitle.textContent = area.dataset.title;
-    infoSub.textContent = area.dataset.sub;
-    infoDesc.textContent = area.dataset.desc;
+cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ir para ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+});
 
-    const badges = (area.dataset.badges || "").split("|").filter(Boolean);
-    infoBadges.innerHTML = badges.map(item => `<span class="badge">${item}</span>`).join("");
+function goTo(index){
+    currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+    setActive(currentIndex);
+    cards[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
 }
 
-areas.forEach(area => {
-    area.addEventListener("click", () => {
-        areas.forEach(a => a.classList.remove("active"));
-        area.classList.add("active");
-        setInfo(area);
-    });
+function setActive(index){
+    cards.forEach((c, i) => c.classList.toggle('active', i === index));
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    const card = cards[index];
+    infoTitle.textContent = card.dataset.title;
+    infoSub.textContent = card.dataset.sub;
+    infoDesc.textContent = card.dataset.desc;
+    const badges = (card.dataset.badges || '').split('|').filter(Boolean);
+    infoBadges.innerHTML = badges.map(item => '<span class="badge">' + item + '</span>').join('');
+}
+
+let scrollTimer;
+track.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+        const trackRect = track.getBoundingClientRect();
+        const trackCenter = trackRect.left + trackRect.width / 2;
+        let closest = 0;
+        let closestDist = Infinity;
+        cards.forEach((card, i) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const dist = Math.abs(cardCenter - trackCenter);
+            if(dist < closestDist){
+                closestDist = dist;
+                closest = i;
+            }
+        });
+        if(closest !== currentIndex){
+            currentIndex = closest;
+            setActive(closest);
+        }
+    }, 80);
 });
+
+prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+cards.forEach((card, i) => {
+    card.addEventListener('click', () => goTo(i));
+});
+
+setActive(0);
 
 // Modal contatos
 const modal = document.getElementById("contactsModal");
