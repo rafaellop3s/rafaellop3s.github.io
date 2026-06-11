@@ -94,7 +94,7 @@ h1,
 .subtitle-en,
 .typing,
 .contact-grid,
-.carousel-section,
+.cards-section,
 .info-panel{
     opacity:0;
     animation:fadeUp .8s ease forwards;
@@ -253,72 +253,51 @@ h1{
     opacity:.9;
 }
 
-/* Carrossel de cards */
-.carousel-section{
+/* Cards grid */
+.cards-section{
     animation-delay:1.92s;
 }
 
-.carousel-container{
-    position:relative;
+.cards-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
     max-width:880px;
     margin:0 auto;
-    padding:0 44px;
 }
 
-.carousel-track{
-    display:flex;
-    gap:16px;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    -ms-overflow-style:none;
-    padding:8px 4px 12px;
-    scroll-behavior:smooth;
-}
-
-.carousel-track::-webkit-scrollbar{
-    display:none;
-}
-
-.carousel-card{
-    flex:0 0 calc(33.333% - 11px);
-    min-width:230px;
-    scroll-snap-align:start;
+.card-item{
     background:var(--panel);
     border:1px solid rgba(135,183,255,.12);
     border-radius:18px;
-    padding:30px 18px 24px;
+    padding:28px 12px 22px;
     text-align:center;
     cursor:pointer;
     transition:all .35s ease;
     position:relative;
-    user-select:none;
     -webkit-tap-highlight-color:transparent;
     touch-action:manipulation;
+    user-select:none;
 }
 
-.carousel-card:hover{
+.card-item:hover{
     border-color:rgba(62,160,255,.30);
 }
 
-.carousel-card.active{
+.card-item.active{
     border-color:var(--blue);
-    box-shadow:
-        0 0 0 1px rgba(31,117,255,.12) inset,
-        0 12px 32px rgba(31,117,255,.10);
+    box-shadow:0 0 0 1px rgba(31,117,255,.12) inset, 0 12px 32px rgba(31,117,255,.10);
     background:var(--panel-strong);
 }
 
-.carousel-card:not(.active){
+.card-item:not(.active){
     opacity:.6;
-    transform:scale(.92);
 }
 
 .card-icon{
-    width:54px;
-    height:54px;
-    margin:0 auto 13px;
+    width:52px;
+    height:52px;
+    margin:0 auto 12px;
     border-radius:14px;
     display:flex;
     align-items:center;
@@ -328,14 +307,14 @@ h1{
     transition:all .3s ease;
 }
 
-.carousel-card.active .card-icon{
+.card-item.active .card-icon{
     border-color:rgba(255,157,46,.40);
     box-shadow:0 0 18px rgba(255,157,46,.12);
 }
 
 .card-icon svg{
-    width:27px;
-    height:27px;
+    width:26px;
+    height:26px;
     stroke:var(--orange);
     fill:none;
     stroke-width:1.8;
@@ -344,78 +323,18 @@ h1{
 }
 
 .card-label{
-    font-size:1.02rem;
+    font-size:.98rem;
     font-weight:700;
-    letter-spacing:.5px;
+    letter-spacing:.4px;
     margin-bottom:3px;
     color:var(--text);
 }
 
 .card-sub{
-    font-size:.8rem;
+    font-size:.76rem;
     color:var(--muted);
     text-transform:uppercase;
-    letter-spacing:.8px;
-}
-
-.carousel-arrow{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    border:1px solid rgba(135,183,255,.18);
-    background:var(--panel-strong);
-    color:var(--text);
-    font-size:1.5rem;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:all .2s ease;
-    z-index:2;
-    backdrop-filter:blur(8px);
-    line-height:1;
-    padding:0 0 2px;
-}
-
-.carousel-arrow:hover{
-    border-color:rgba(62,160,255,.45);
-    box-shadow:0 0 20px rgba(31,117,255,.12);
-}
-
-.carousel-arrow--prev{
-    left:-16px;
-}
-
-.carousel-arrow--next{
-    right:-16px;
-}
-
-.carousel-dots{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:18px;
-}
-
-.carousel-dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    border:none;
-    background:rgba(135,183,255,.16);
-    cursor:pointer;
-    transition:all .3s ease;
-    padding:0;
-}
-
-.carousel-dot.active{
-    background:var(--blue);
-    width:28px;
-    border-radius:5px;
-    box-shadow:0 0 12px rgba(31,117,255,.2);
+    letter-spacing:.6px;
 }
 
 .info-panel{
@@ -641,17 +560,14 @@ h1{
         max-width:640px;
     }
 
-    .carousel-container{
-        padding:0 18px;
+    .cards-grid{
+        grid-template-columns:repeat(2, 1fr);
+        gap:12px;
+        max-width:480px;
     }
 
-    .carousel-card{
-        flex:0 0 75%;
-        min-width:0;
-    }
-
-    .carousel-arrow{
-        display:none;
+    .card-item{
+        padding:22px 10px 18px;
     }
 }
     
@@ -802,56 +718,51 @@ h1{
         </a>
     </div>
 
-    <section class="carousel-section" aria-label="Áreas de atuação">
-        <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
-                <div class="carousel-card active" data-title="DADOS" data-sub="Data Analytics" data-desc="Análise de dados, SQL, dashboards e indicadores para apoiar decisões mais sólidas e consistentes." data-badges="SQL|Dashboards|KPIs|BI">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="6" y="11" width="3" height="8" rx="1"></rect>
-                            <rect x="10.5" y="7" width="3" height="12" rx="1"></rect>
-                            <rect x="15" y="3" width="3" height="16" rx="1"></rect>
-                        </svg>
-                    </div>
-                    <div class="card-label">DADOS</div>
-                    <div class="card-sub">data analytics</div>
+    <section class="cards-section" aria-label="Áreas de atuação">
+        <div class="cards-grid">
+            <div class="card-item active" data-title="DADOS" data-sub="Data Analytics" data-desc="Análise de dados, SQL, dashboards e indicadores para apoiar decisões mais sólidas e consistentes." data-badges="SQL|Dashboards|KPIs|BI">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="6" y="11" width="3" height="8" rx="1"></rect>
+                        <rect x="10.5" y="7" width="3" height="12" rx="1"></rect>
+                        <rect x="15" y="3" width="3" height="16" rx="1"></rect>
+                    </svg>
                 </div>
-                <div class="carousel-card" data-title="AUTOMAÇÃO" data-sub="Automation" data-desc="Integrações, Python, APIs e automação de tarefas para reduzir trabalho manual e aumentar produtividade." data-badges="Python|APIs|Integrações|Processos">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="23 4 23 10 17 10"></polyline>
-                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                        </svg>
-                    </div>
-                    <div class="card-label">AUTOMAÇÃO</div>
-                    <div class="card-sub">automation</div>
-                </div>
-                <div class="carousel-card" data-title="GESTÃO FINANCEIRA" data-sub="Financial Operations" data-desc="Fluxo de caixa, indicadores financeiros, controle operacional e apoio à gestão com visão de negócio." data-badges="Fluxo de Caixa|Indicadores|Gestão|Controle">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                            <polyline points="17 6 23 6 23 12"></polyline>
-                        </svg>
-                    </div>
-                    <div class="card-label">GESTÃO FINANCEIRA</div>
-                    <div class="card-sub">financial operations</div>
-                </div>
-                <div class="carousel-card" data-title="INTELIGÊNCIA DE NEGÓCIOS" data-sub="Business Intelligence" data-desc="A interseção entre automação, dados e finanças para transformar informação em decisão." data-badges="Estratégia|Decisão|Insights|Eficiência">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M9 18h6"></path>
-                            <path d="M10 22h4"></path>
-                            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
-                        </svg>
-                    </div>
-                    <div class="card-label">INTELIGÊNCIA DE NEGÓCIOS</div>
-                    <div class="card-sub">business intelligence</div>
-                </div>
+                <div class="card-label">DADOS</div>
+                <div class="card-sub">data analytics</div>
             </div>
-            <button class="carousel-arrow carousel-arrow--prev" id="prevBtn" aria-label="Anterior">‹</button>
-            <button class="carousel-arrow carousel-arrow--next" id="nextBtn" aria-label="Próximo">›</button>
+            <div class="card-item" data-title="AUTOMAÇÃO" data-sub="Automation" data-desc="Integrações, Python, APIs e automação de tarefas para reduzir trabalho manual e aumentar produtividade." data-badges="Python|APIs|Integrações|Processos">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                </div>
+                <div class="card-label">AUTOMAÇÃO</div>
+                <div class="card-sub">automation</div>
+            </div>
+            <div class="card-item" data-title="GESTÃO FINANCEIRA" data-sub="Financial Operations" data-desc="Fluxo de caixa, indicadores financeiros, controle operacional e apoio à gestão com visão de negócio." data-badges="Fluxo de Caixa|Indicadores|Gestão|Controle">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                </div>
+                <div class="card-label">GESTÃO FINANCEIRA</div>
+                <div class="card-sub">financial operations</div>
+            </div>
+            <div class="card-item" data-title="INTELIGÊNCIA DE NEGÓCIOS" data-sub="Business Intelligence" data-desc="A interseção entre automação, dados e finanças para transformar informação em decisão." data-badges="Estratégia|Decisão|Insights|Eficiência">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                        <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                    </svg>
+                </div>
+                <div class="card-label">INTELIGÊNCIA DE NEGÓCIOS</div>
+                <div class="card-sub">business intelligence</div>
+            </div>
         </div>
-        <div class="carousel-dots" id="carouselDots"></div>
 
         <div class="info-panel" id="infoPanel">
             <div class="info-top">
@@ -949,36 +860,16 @@ function typeEffect(){
 
 setTimeout(typeEffect, 1800);
 
-// Carrossel
-const track = document.getElementById('carouselTrack');
-const cards = Array.from(track.querySelectorAll('.carousel-card'));
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const dotsContainer = document.getElementById('carouselDots');
+// Cards
+const cards = document.querySelectorAll('.card-item');
 const infoTitle = document.getElementById('infoTitle');
 const infoSub = document.getElementById('infoSub');
 const infoDesc = document.getElementById('infoDesc');
 const infoBadges = document.getElementById('infoBadges');
-let currentIndex = 0;
 
-cards.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Ir para ' + (i + 1));
-    dot.addEventListener('click', () => goTo(i));
-    dotsContainer.appendChild(dot);
-});
-
-function goTo(index){
-    currentIndex = Math.max(0, Math.min(index, cards.length - 1));
-    setActive(currentIndex);
-    cards[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-}
-
-function setActive(index){
-    cards.forEach((c, i) => c.classList.toggle('active', i === index));
-    document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === index));
-    const card = cards[index];
+function setActive(card){
+    cards.forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
     infoTitle.textContent = card.dataset.title;
     infoSub.textContent = card.dataset.sub;
     infoDesc.textContent = card.dataset.desc;
@@ -986,36 +877,9 @@ function setActive(index){
     infoBadges.innerHTML = badges.map(item => '<span class="badge">' + item + '</span>').join('');
 }
 
-let scrollTimer;
-track.addEventListener('scroll', () => {
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-        const visibleCenter = track.scrollLeft + track.clientWidth / 2;
-        let closest = 0;
-        let closestDist = Infinity;
-        cards.forEach((card, i) => {
-            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-            const dist = Math.abs(cardCenter - visibleCenter);
-            if(dist < closestDist){
-                closestDist = dist;
-                closest = i;
-            }
-        });
-        if(closest !== currentIndex){
-            currentIndex = closest;
-            setActive(closest);
-        }
-    }, 80);
+cards.forEach(card => {
+    card.addEventListener('click', () => setActive(card));
 });
-
-prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-
-cards.forEach((card, i) => {
-    card.addEventListener('click', () => goTo(i));
-});
-
-setActive(0);
 
 // Modal contatos
 const modal = document.getElementById("contactsModal");
