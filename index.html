@@ -990,14 +990,12 @@ let scrollTimer;
 track.addEventListener('scroll', () => {
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(() => {
-        const trackRect = track.getBoundingClientRect();
-        const trackCenter = trackRect.left + trackRect.width / 2;
+        const visibleCenter = track.scrollLeft + track.clientWidth / 2;
         let closest = 0;
         let closestDist = Infinity;
         cards.forEach((card, i) => {
-            const cardRect = card.getBoundingClientRect();
-            const cardCenter = cardRect.left + cardRect.width / 2;
-            const dist = Math.abs(cardCenter - trackCenter);
+            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+            const dist = Math.abs(cardCenter - visibleCenter);
             if(dist < closestDist){
                 closestDist = dist;
                 closest = i;
